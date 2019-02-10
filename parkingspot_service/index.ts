@@ -34,9 +34,9 @@ const list: router.AugmentedRequestHandler = async (request: router.ServerReques
         micro.sendError(request, response, {statusCode: 304, message: 'Could not find any spots'});   
 };
 
-const service: micro.RequestHandler = router.router(
+const service: micro.RequestHandler[] =[ 
     router.get('/list', list),
     router.get('/listUser/:userId', list)
-)
+];
 
 export = service;

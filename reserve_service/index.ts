@@ -113,9 +113,14 @@ const reserve: router.AugmentedRequestHandler = async (request: router.ServerReq
     }
 };
 
-const service: micro.RequestHandler = router.router(
+// const service: micro.RequestHandler = router.router(
+//     router.post('/reserve/:spotId', reserve),
+//     router.post('/reserve/cancel/:spotId', cancel)
+// )
+
+const service: micro.RequestHandler[] = [
     router.post('/reserve/:spotId', reserve),
     router.post('/reserve/cancel/:spotId', cancel)
-)
+];
 
 export = service;

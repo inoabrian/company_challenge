@@ -12,6 +12,8 @@ const getAvailableSpots: (connection: mongo.MongoClient, userId: mongo.ObjectID)
             .collection(process.env.MONGO_COLLECTION)
             .find({owner: userId})
             .toArray();
+
+    return result;
 }
 
 const list: router.AugmentedRequestHandler = async (request: router.ServerRequest, response: ServerResponse): Promise<any> => {

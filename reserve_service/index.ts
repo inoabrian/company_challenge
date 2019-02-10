@@ -38,6 +38,42 @@ const alreadyReservedSpot: (connection: mongo.MongoClient, userId: mongo.ObjectI
         .findOne({owner: userId});
 }
 
+// method to update parking spot document to cancel a reservation of a reserved spot 
+const cancelReservation: (connection: mongo.MongoClient, spotId: mongo.ObjectID) => Promise<mongo.UpdateWriteOpResult> = async (connection: mongo.MongoClient, spotId: mongo.ObjectID): Promise<mongo.UpdateWriteOpResult> => {
+    return connection.db().collection(process.env.MONGO_COLLECTION)
+        .updateOne({_id: spotId}, {$set:{owner: null, reserveTime: null}});
+}
+
+const cancel: router.AugmentedRequestHandler = async (request: router.ServerRequest, response: ServerResponse): Promise<any> => {
+    // mongo db connection promise
+    let dbConnection: () => Promise<mongo.MongoClient> = db.default;
+
+    let connection: mongo.MongoClient = await dbConnection();
+    
+    const body = await micro.json(request);
+
+    // get the users id from the request payload
+    let userId: mongo.ObjectID = new mongo.ObjectID(body["userId"]);
+
+    // get the spotId from the query params
+    let spotId: mongo.ObjectID | null = request.params.spotId ? new mongo.ObjectID(request.params.spotId) : null;
+
+    // first we should check if the user already has a spot reserved
+    let userAlreadyReservedSpot = await alreadyReservedSpot(connection, userId);
+
+    if(userAlreadyReservedSpot && userAlreadyReservedSpot._id.equals(spotId)) {
+        let canceledReservation: mongo.UpdateWriteOpResult  = await cancelReservation(connection, spotId);
+
+        if(canceledReservation.modifiedCount) {
+            micro.send(response, 200);
+        } else {
+            micro.sendError(request, response, {statusCode: 500, message: 'Could not cancel reserved spot'});       
+        }
+    } else {
+        micro.sendError(request, response, {statusCode: 404, message: 'Could not find reserved spot'});   
+    }
+}
+
 const reserve: router.AugmentedRequestHandler = async (request: router.ServerRequest, response: ServerResponse): Promise<any> => {
     // mongo db connection promise
     let dbConnection: () => Promise<mongo.MongoClient> = db.default;
@@ -78,7 +114,8 @@ const reserve: router.AugmentedRequestHandler = async (request: router.ServerReq
 };
 
 const service: micro.RequestHandler = router.router(
-    router.post('/reserve/:spotId', reserve)
+    router.post('/reserve/:spotId', reserve),
+    router.post('/reserve/cancel/:spotId', cancel)
 )
 
 export = service;

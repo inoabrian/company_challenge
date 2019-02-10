@@ -1,0 +1,37 @@
+{
+  "name": "parkingspot_service",
+  "version": "1.0.0",
+  "description": "service to return list of available parking spots",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "micro dist/index.js",
+    "dev": "micro-dev dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inoabrian/unu_challenge.git"
+  },
+  "keywords": [
+    "unu",
+    "challenge"
+  ],
+  "author": "inoabrian",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/inoabrian/unu_challenge/issues"
+  },
+  "homepage": "https://github.com/inoabrian/unu_challenge#readme",
+  "dependencies": {
+    "@types/micro": "^7.3.3",
+    "@types/mongodb": "^3.1.19",
+    "dotenv": "^6.2.0",
+    "micro": "^9.3.3",
+    "microrouter": "^3.1.3",
+    "mongodb": "^3.1.13"
+  },
+  "devDependencies": {
+    "micro-dev": "^3.0.0",
+    "@types/microrouter": "^3.1.0"
+  }
+}

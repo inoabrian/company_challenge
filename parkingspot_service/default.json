@@ -1,0 +1,4 @@
+{"lat": 40.8135923, "lon": -74.2177845, "zone": "1A", "street": "S. Fullterton Avenue", "owner": null},
+{"lat": 40.813540, "lon":  -74.217724, "zone": "1A", "street": "S. Fullterton Avenue", "owner": null},
+{"lat": 40.813333, "lon": -74.217798, "zone": "1A", "street": "S. Fullterton Avenue", "owner": null},
+{"lat": 40.812939, "lon": -74.217891, "zone": "1A", "street": "S. Fullterton Avenue", "owner": new ObjectID()},

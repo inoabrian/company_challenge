@@ -1,12 +1,18 @@
 {
-  "name": "reserve_service",
+  "name": "ParkingBookingService",
   "version": "1.0.0",
   "description": "service to book a spot",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
+    "postinstall": "tsc -p ./ && npm run pre_start",
+    "pre_start": "npm run dump_db && npm run seed_db",
+    "dump_db": "mongo unu --eval \"printjson(db.dropDatabase())\"",
+    "seed_db": "mongoimport --db unu --collection parking --file ./parkingspot_service/default.json --jsonArray",
+    "watch": "tsc -w ./",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "micro-dev dist/index.js",
-    "start": "micro dist/index.js"
+    "dev": "node ./dist/index.js",
+    "start": "node ./dist/index.js",
+    "docker-debug": "docker-compose up --build"
   },
   "repository": {
     "type": "git",
@@ -28,7 +34,8 @@
     "dotenv": "^6.2.0",
     "micro": "^9.3.3",
     "microrouter": "^3.1.3",
-    "mongodb": "^3.1.13"
+    "mongodb": "^3.1.13",
+    "typescript": "^3.2.4"
   },
   "devDependencies": {
     "@types/microrouter": "^3.1.0",

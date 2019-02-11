@@ -120,7 +120,7 @@ const book: router.AugmentedRequestHandler = async (request: router.ServerReques
 
 const service: micro.RequestHandler[] = [
     router.post('/book/:spotId', book),
-    router.post('/book/cancel/:spotId', cancel)
+    router.post('/unbook/:spotId', cancel)
 ];
 
 export = service;

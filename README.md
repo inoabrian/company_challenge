@@ -36,6 +36,15 @@ I chose to Node.js for this service using the following modules:
 **Note:**
    <br/>**npm install** - will install project dependencies **does not seed our docker mongo db**
    <br/>**npm run docker-debug** - will build and run our docker containers for our app and mongo db
+   <br/>**TO SEED DATA IN OUR MONGO DB DOCKER CONTAINER I ADDED A /seed_list POST REQUEST HANDLER**
+   
+	```
+	curl -X POST \
+	http://localhost:3000/seed_list \
+	-H 'Content-Type: application/json' \
+	-H 'Postman-Token: bbeda0a5-cbcf-44b1-bb95-87cdfd5d67cd' \
+	-H 'cache-control: no-cache'
+	```	
    
    
 ## Example HTTP Requests

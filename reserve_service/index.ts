@@ -40,7 +40,8 @@ const alreadyReservedSpot: (connection: mongo.MongoClient, userId: mongo.ObjectI
 
 // method to update parking spot document to cancel a reservation of a reserved spot 
 const cancelReservation: (connection: mongo.MongoClient, spotId: mongo.ObjectID) => Promise<mongo.UpdateWriteOpResult> = async (connection: mongo.MongoClient, spotId: mongo.ObjectID): Promise<mongo.UpdateWriteOpResult> => {
-    return connection.db().collection(process.env.MONGO_COLLECTION)
+    return connection.db()
+        .collection(process.env.MONGO_COLLECTION)
         .updateOne({_id: spotId}, {$set:{owner: null, reserveTime: null}});
 }
 
@@ -53,7 +54,7 @@ const cancel: router.AugmentedRequestHandler = async (request: router.ServerRequ
     const body = await micro.json(request);
 
     // get the users id from the request payload
-    let userId: mongo.ObjectID = new mongo.ObjectID(body["userId"]);
+    let userId: mongo.ObjectID = new mongo.ObjectID(body["userId"].toString());
 
     // get the spotId from the query params
     let spotId: mongo.ObjectID | null = request.params.spotId ? new mongo.ObjectID(request.params.spotId) : null;
@@ -120,7 +121,7 @@ const reserve: router.AugmentedRequestHandler = async (request: router.ServerReq
 
 const service: micro.RequestHandler[] = [
     router.post('/reserve/:spotId', reserve),
-    router.post('/reserve/cancel/:spotId', cancel)
+    router.post('/unreserve/:spotId', cancel)
 ];
 
 export = service;

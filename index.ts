@@ -13,4 +13,7 @@ const service: micro.RequestHandler = router.router(
     ...booking_service
 );
 
-export = service;
+micro.default(service)
+    .listen(process.env.PORT, () => {
+        console.log(`service listening ${process.env.PORT}`);
+    });

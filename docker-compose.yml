@@ -1,14 +1,24 @@
 # docker-compose.yml
-app:
-  build: ./
-  volumes:
-    - ./:/dist
-  ports:
-    - 3000:3000
-  environment:
-    - NODE_ENV=development
-    - PORT=3000
-    - MONGO_URL="mongodb://localhost:27017/unu"
-    - MONGO_COLLECTION="parking"
-  command:
-    sh -c 'npm i && node index.js'
+version: "2"
+
+services:
+  web:
+    build: .
+    links: 
+      - mongo
+    volumes:
+      - ./dist:/service/dist
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - MONGO_URL=mongodb://localhost:27017/unu
+      - MONGO_DB=unu
+      - MONGO_COLLECTION=parking
+  mongo:
+    image: mongo:latest
+    volumes:
+      - mongodata:/data/db
+volumes:
+  mongodata:

@@ -55,12 +55,33 @@ I chose to Node.js for this service using the following modules:
 	-H 'cache-control: no-cache'
 	```
 **Booking**
-
-**Reserve**
-- reserve a reservation<br/>
+- book a parking spot<br/>
 	```
 	curl -X POST \
-	http://localhost:3000/reserve/5c6060fe1500a360b1d0cad4 \
+	http://localhost:3000/book/5c60e9f2e0b52affe409ba6c \
+	-H 'Content-Type: application/json' \
+	-H 'Postman-Token: 6b9ecaef-1722-47bb-81cf-8f54fd9c218c' \
+	-H 'cache-control: no-cache' \
+	-d '{
+	"userId": "5c6063681500a360b1d0cad8"
+	}'
+	```
+- release a parking spot booking<br/>
+	```
+	curl -X POST \
+	http://localhost:3000/unbook/5c60e9f2e0b52affe409ba6c \
+	-H 'Content-Type: application/json' \
+	-H 'Postman-Token: 070be9a1-2743-4e17-9f12-504f1d939789' \
+	-H 'cache-control: no-cache' \
+	-d '{
+		"userId": "5c6063681500a360b1d0cad8"
+	}'
+	```
+**Reserve**
+- reserve a parking spot<br/>
+	```
+	curl -X POST \
+	http://localhost:3000/reserve/5c60e9f2e0b52affe409ba6c \
 	-H 'Content-Type: application/json' \
 	-H 'Postman-Token: 6b9ecaef-1722-47bb-81cf-8f54fd9c218c' \
 	-H 'cache-control: no-cache' \
@@ -71,7 +92,7 @@ I chose to Node.js for this service using the following modules:
 - release a reservation<br/>
 	```
 	curl -X POST \
-	http://localhost:3000/unreserve/5c6060fe1500a360b1d0cad4 \
+	http://localhost:3000/unreserve/5c60e9f2e0b52affe409ba6c \
 	-H 'Content-Type: application/json' \
 	-H 'Postman-Token: 070be9a1-2743-4e17-9f12-504f1d939789' \
 	-H 'cache-control: no-cache' \

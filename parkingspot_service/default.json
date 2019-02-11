@@ -1,4 +1,39 @@
-{"lat": 40.8135923, "lon": -74.2177845, "zone": "1A", "street": "S. Fullterton Avenue", "owner": null},
-{"lat": 40.813540, "lon":  -74.217724, "zone": "1A", "street": "S. Fullterton Avenue", "owner": null},
-{"lat": 40.813333, "lon": -74.217798, "zone": "1A", "street": "S. Fullterton Avenue", "owner": null},
-{"lat": 40.812939, "lon": -74.217891, "zone": "1A", "street": "S. Fullterton Avenue", "owner": new ObjectID()},
+[
+    {
+        "_id": new ObjectId("5c60e9f2e0b52affe409ba6c"),
+        "lat": 40.8135923,
+        "lon": -74.2177845,
+        "zone": "1A",
+        "street": "S. Fullterton Avenue",
+        "owner": new ObjectId("5c6063681500a360b1d0cad8"),
+        "reserveTime": null,
+        "booked": false
+    },
+    {
+        "lat": 40.813540,
+        "lon": -74.217724,
+        "zone": "1A",
+        "street": "S. Fullterton Avenue",
+        "owner": null,
+        "reserveTime": null,
+        "booked": false
+    },
+    {
+        "lat": 40.813333,
+        "lon": -74.217798,
+        "zone": "1A",
+        "street": "S. Fullterton Avenue",
+        "owner": null,
+        "reserveTime": null,
+        "booked": false
+    },
+    {
+        "lat": 40.812939,
+        "lon": -74.217891,
+        "zone": "1A",
+        "street": "S. Fullterton Avenue",
+        "owner": null,
+        "reserveTime": null,
+        "booked": false
+    }
+]

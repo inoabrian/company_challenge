@@ -13,7 +13,7 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
-      - MONGO_URL=mongodb://localhost:27017/unu
+      - MONGO_URL=mongodb://mongo:27017/unu
       - MONGO_DB=unu
       - MONGO_COLLECTION=parking
   mongo:

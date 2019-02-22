@@ -1,5 +1,5 @@
 
-# unu_challenge
+# company_challenge
 
 ## Parking Spot Booking Service(s)
 
